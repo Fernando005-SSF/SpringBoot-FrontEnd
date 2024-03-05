@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const EditUser = () => {
@@ -28,7 +28,7 @@ const EditUser = () => {
 
     }
 
-    useEffect (()=>{
+   useEffect (()=>{
         loadUser();
     },[])
 
