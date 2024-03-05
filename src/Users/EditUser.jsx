@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
-const AddUser = () => {
+const EditUser = () => {
 
     let navigate = useNavigate();
+    const {id} = useParams();
 
   const [user,userState] = useState({
     name : "",
@@ -18,12 +19,22 @@ const AddUser = () => {
         userState({...user,[event.target.name]:event.target.value})
     }
 
+
     const onSubmit = async(event) =>{
 
       event.preventDefault()
-      await axios.post("http://localhost:8080/user",user)
+      await axios.put(`http://localhost:8080/user/${id}`,user)
       navigate("/")
 
+    }
+
+    useEffect (()=>{
+        loadUser();
+    },[])
+
+    const loadUser =async ()=>{
+        const result = await axios.get(`http://localhost:8080/user/${id}`)
+        setUser(result)
     }
 
 
@@ -35,7 +46,7 @@ const AddUser = () => {
       <div className="row">
 
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-5 shadow">
-          <h2 className="text-center m-4" >Register Form</h2>
+          <h2 className="text-center m-4" >Edit User</h2>
 
        
       <form onSubmit={(event)=> onSubmit(event)}>
@@ -71,4 +82,4 @@ const AddUser = () => {
   )
 }
 
-export default AddUser
+export default EditUser
