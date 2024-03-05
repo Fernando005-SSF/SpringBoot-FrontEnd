@@ -1,6 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const AddUser = () => {
+
+  const [user,userState] = useState({
+    name : "",
+    username : "",
+    email : ""
+    })
+
+    const{name,username,email} = user;
+
+    const onInputChange = (event)=>{
+        userState({...user,[event.target.name]:event.target.value})
+    }
+
   return (
     <div className="container">
 
@@ -12,21 +25,21 @@ const AddUser = () => {
           <div className="mb-3">
 
             <label htmlFor="Name" className="form-label">Name</label>
-            <input type="text" className="form-control" placeholder='Enter your name' name='name' />
+            <input type="text" className="form-control" placeholder='Enter your name' name='name' value={name} onChange={(event)=>onInputChange(event)} />
 
           </div>
 
           <div className="mb-3">
 
             <label htmlFor="UserName" className="form-label">User Name</label>
-            <input type="text" className="form-control" placeholder='Enter your user name' name='UserName' />
+            <input type="text" className="form-control" placeholder='Enter your user name' name='UserName' value={username} onChange={(event)=>onInputChange(event)}/>
 
           </div>
 
           <div className="mb-3">
 
             <label htmlFor="Email" className="form-label">Email</label>
-            <input type="text" className="form-control" placeholder='Enter your Email' name='Email' />
+            <input type="text" className="form-control" placeholder='Enter your Email' name='Email' value={email} onChange={(event)=>onInputChange(event)}/>
 
           </div>
 
