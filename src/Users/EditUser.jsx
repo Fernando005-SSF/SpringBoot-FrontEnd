@@ -7,7 +7,7 @@ const EditUser = () => {
     let navigate = useNavigate();
     const {id} = useParams();
 
-  const [user,userState] = useState({
+  const [user,setUser] = useState({
     name : "",
     userName : "",
     email : ""
@@ -16,7 +16,7 @@ const EditUser = () => {
     const{name,userName,email} = user;
 
     const onInputChange = (event)=>{
-        userState({...user,[event.target.name]:event.target.value})
+        setUser({...user,[event.target.name]:event.target.value})
     }
 
 
@@ -32,9 +32,10 @@ const EditUser = () => {
         loadUser();
     },[])
 
-    const loadUser =async ()=>{
+    const loadUser = async()=>{
         const result = await axios.get(`http://localhost:8080/user/${id}`)
-        setUser(result)
+        setUser(result.data)
+
     }
 
 

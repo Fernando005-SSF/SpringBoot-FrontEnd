@@ -18,7 +18,7 @@ function App() {
       <Routes>
             <Route exact path='/' element={<Home/>}/>
             <Route exact path='/AddUser' element={<AddUser/>}/>
-            <Route exact path='/EditUser:id' element={<EditUser/>}/>
+            <Route exact path='/EditUser/:id' element={<EditUser/>}/>
             
       </Routes>
 
